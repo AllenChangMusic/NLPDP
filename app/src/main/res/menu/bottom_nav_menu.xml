@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_name"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/title_name" />
+
+    <item
+        android:id="@+id/navigation_din"
+        android:icon="@drawable/ic_baseline_input_24"
+        android:title="@string/title_DIN" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_baseline_format_list_numbered_24"
+        android:title="@string/title_selection" />
+
+</menu>

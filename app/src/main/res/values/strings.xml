@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NLPDP</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_name">Name</string>
+    <string name="title_DIN">DIN</string>
+    <string name="title_selection">Selection</string>
+</resources>

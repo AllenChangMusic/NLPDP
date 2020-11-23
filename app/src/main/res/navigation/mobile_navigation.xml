@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_name">
+
+    <fragment
+        android:id="@+id/navigation_name"
+        android:name="com.violinmd.nlpdp.ui.HomeFragment"
+        android:label="@string/title_name"
+        tools:layout="@layout/fragment_name" />
+
+    <fragment
+        android:id="@+id/navigation_din"
+        android:name="com.violinmd.nlpdp.ui.DashboardFragment"
+        android:label="@string/title_DIN"
+        tools:layout="@layout/fragment_din" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.violinmd.nlpdp.ui.NotificationsFragment"
+        android:label="@string/title_selection"
+        tools:layout="@layout/fragment_selection" />
+</navigation>
