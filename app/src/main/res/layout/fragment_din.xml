@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.DashboardFragment">
+    tools:context=".ui.DinFragment">
 
     <EditText
         android:id="@+id/editTextDIN"
@@ -29,7 +29,7 @@ android:text="Search"
 app:layout_constraintEnd_toEndOf="parent"
 app:layout_constraintTop_toBottomOf="@+id/editTextDIN" />
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
 android:id="@+id/scroll_din"
 android:layout_width="match_parent"
 android:layout_height="0dp"
@@ -40,6 +40,8 @@ android:layout_marginBottom="75dp"
 app:layout_constraintBottom_toBottomOf="parent"
 app:layout_constraintEnd_toEndOf="parent"
 app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toBottomOf="@+id/button_din" />
+app:layout_constraintTop_toBottomOf="@+id/button_din"
+    android:orientation="vertical">
+</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

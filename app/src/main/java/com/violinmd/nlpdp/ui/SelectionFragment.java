@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ import java.util.List;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-public class NotificationsFragment extends Fragment {
+public class SelectionFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class NotificationsFragment extends Fragment {
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                        Log.i("Spinner", spinner.getItemAtPosition(position).toString());
+                        //Log.i("Spinner", spinner.getItemAtPosition(position).toString());
                         if (position != arraySpinner.length - 1) {
                         }
                     }
@@ -90,7 +91,7 @@ public class NotificationsFragment extends Fragment {
                         if(meds!=null){
 
                             getActivity().runOnUiThread(() -> {
-                                ConstraintLayout scrollView = root.findViewById(R.id.scroll_select);
+                                LinearLayout scrollView = root.findViewById(R.id.scroll_select);
                                 scrollView.removeAllViews();
 
                                 MultiLevelRecyclerView multiLevelRecyclerView = new MultiLevelRecyclerView(getContext());

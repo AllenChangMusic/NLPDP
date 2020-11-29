@@ -1,6 +1,7 @@
 package com.violinmd.nlpdp.RecyclerItem;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.multilevelview.MultiLevelAdapter;
 import com.multilevelview.MultiLevelRecyclerView;
+import com.violinmd.nlpdp.MainActivity;
 import com.violinmd.nlpdp.R;
 
 import java.util.ArrayList;
@@ -52,7 +54,14 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
                 break;
         }
         mViewHolder.mTitle.setText(mItem.getText());
-        mViewHolder.mTitle.setTextColor(Color.WHITE);
+        switch (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                mViewHolder.mTitle.setTextColor(Color.WHITE);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                mViewHolder.mTitle.setTextColor(Color.BLACK);
+                break;
+        }
         if (mItem.getLevel()==0){
             mViewHolder.mTitle.setTypeface(null, Typeface.BOLD);
         }
@@ -63,7 +72,15 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
         } else if (mItem.getSecondText().toLowerCase().contains("special")){
             mViewHolder.mSubtitle.setTextColor(Color.RED);
         } else {
-            mViewHolder.mSubtitle.setTextColor(Color.WHITE);
+            switch (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+                case Configuration.UI_MODE_NIGHT_YES:
+                    mViewHolder.mSubtitle.setTextColor(Color.WHITE);
+                    break;
+                case Configuration.UI_MODE_NIGHT_NO:
+                    mViewHolder.mSubtitle.setTextColor(Color.BLACK);
+                    break;
+            }
+
         }
     }
 

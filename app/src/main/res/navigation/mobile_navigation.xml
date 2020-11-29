@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_name"
-        android:name="com.violinmd.nlpdp.ui.HomeFragment"
+        android:name="com.violinmd.nlpdp.ui.NameFragment"
         android:label="@string/title_name"
         tools:layout="@layout/fragment_name" />
 
     <fragment
         android:id="@+id/navigation_din"
-        android:name="com.violinmd.nlpdp.ui.DashboardFragment"
+        android:name="com.violinmd.nlpdp.ui.DinFragment"
         android:label="@string/title_DIN"
         tools:layout="@layout/fragment_din" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.violinmd.nlpdp.ui.NotificationsFragment"
+        android:name="com.violinmd.nlpdp.ui.SelectionFragment"
         android:label="@string/title_selection"
         tools:layout="@layout/fragment_selection" />
 </navigation>

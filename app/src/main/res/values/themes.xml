@@ -15,10 +15,11 @@
         <item name="actionBarSize">50dp</item>
     </style>
 
-    <style name="ThemeOverlay.AppCompat.Dark.NoActionBar.FullScreen" parent="@style/ThemeOverlay.AppCompat.Dark">
+    <style name="Theme.AppCompat.DayNight.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:drawable">@drawable/nlpdp_white</item>
     </style>
 </resources>

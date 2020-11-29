@@ -66,7 +66,7 @@ public class NLPDP {
                 }
                 return meds;
             } else if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP Error code : " + conn.getResponseCode());
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class NLPDP {
                 }
                 return meds;
             } else if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP Error code : " + conn.getResponseCode());
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -188,7 +188,7 @@ public class NLPDP {
                 }
                 return meds;
             } else if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP Error code : " + conn.getResponseCode());
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -9,13 +9,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="847dp"
-        android:layout_height="763dp"
+        android:layout_width="1181dp"
+        android:layout_height="946dp"
         android:background="#000000"
-        android:src="@drawable/nlpdp"
+        android:src="?android:attr/drawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/nlpdp" />
+        app:srcCompat="?android:attr/drawable" />
 </androidx.constraintlayout.widget.ConstraintLayout>
