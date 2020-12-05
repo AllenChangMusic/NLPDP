@@ -2,15 +2,18 @@ package com.violinmd.nlpdp.RecyclerItem;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -107,9 +110,18 @@ public class RecyclerViewAdapterMed extends MultiLevelAdapter {
                     if(urlText.contains("pdf")){
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW);
                         browserIntent.setDataAndType(Uri.parse(urlText), "application/pdf");
-                        Intent chooser = Intent.createChooser(browserIntent, "Open PDF file using:");
-                        chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // optional
-                        v.getContext().startActivity(chooser);
+                        final PackageManager packageManager = v.getContext().getPackageManager();
+                        List list = packageManager.queryIntentActivities(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                        if(list.size()>0){
+                            Intent chooser = Intent.createChooser(browserIntent, "Open PDF file using:");
+                            chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // optional
+                            v.getContext().startActivity(chooser);
+                        } else {
+                            Toast toast = Toast.makeText(v.getContext(),"No supported PDF application found!",Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.BOTTOM,0,200);
+                            toast.show();
+                        }
+
                     } else {
                         Thread network = new Thread() {
                             public void run() {

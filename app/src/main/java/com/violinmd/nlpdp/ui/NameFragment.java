@@ -146,7 +146,7 @@ public class NameFragment extends Fragment {
 
         RecyclerItem item5 = new RecyclerItem(1);
         item5.setText("<CLICK FOR MORE INFO>");
-        item5.setMedication(med);
+        item5.setUrl(med.url);
         itemList.add(item5);
 
         return itemList;

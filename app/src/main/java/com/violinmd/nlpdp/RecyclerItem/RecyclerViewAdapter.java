@@ -31,7 +31,6 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
     private List<RecyclerItem> mListItems = new ArrayList<>();
     private RecyclerItem mItem;
     private final MultiLevelRecyclerView mMultiLevelRecyclerView;
-    private Medication medication;
 
     public RecyclerViewAdapter(Context mContext, List<RecyclerItem> mListItems, MultiLevelRecyclerView mMultiLevelRecyclerView) {
         super(mListItems);
@@ -56,6 +55,7 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
                 //holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
                 break;
         }
+        mViewHolder.urlstring = mItem.getUrl();
         mViewHolder.mTitle.setText(mItem.getText());
         switch (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
             case Configuration.UI_MODE_NIGHT_YES:
@@ -90,6 +90,7 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
     private class Holder extends RecyclerView.ViewHolder {
 
         TextView mTitle, mSubtitle;
+        String urlstring;
         LinearLayout mTextBox;
 
         Holder(View itemView) {
@@ -106,7 +107,7 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
                     if (mTitle.getText().toString().toLowerCase().contains("more info")){
                         Thread network = new Thread() {
                             public void run() {
-                                Medication newmed = NLPDP.loadInfo(mItem.getMedication().url);
+                                Medication newmed = NLPDP.loadInfo(urlstring);
                                 Intent intent = new Intent(v.getContext(), MedicationView.class);
                                 intent.putExtra("medication",newmed);
                                 v.getContext().startActivity(intent);

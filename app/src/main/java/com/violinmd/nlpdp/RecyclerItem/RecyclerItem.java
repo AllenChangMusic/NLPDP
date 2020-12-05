@@ -1,15 +1,12 @@
 package com.violinmd.nlpdp.RecyclerItem;
 
 import com.multilevelview.models.RecyclerViewItem;
-import com.violinmd.nlpdp.Medication;
 
 public class RecyclerItem extends RecyclerViewItem {
 
     public String text="";
 
     public String secondText = "";
-
-    public Medication medication;
 
     public String url = "";
 
@@ -33,16 +30,6 @@ public class RecyclerItem extends RecyclerViewItem {
     public void setUrl(String url) {
         this.url = url;
     }
-
-    public void setMedication(Medication medication) {
-        this.medication = medication;
-    }
-    public Medication getMedication() {
-        return medication;
-    }
-
-
-
 
     public RecyclerItem(int level) {
         super(level);
