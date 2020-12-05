@@ -45,7 +45,7 @@ public class NLPDP {
                             m = new Medication();
                             String temp = br.readLine().trim();
                             m.brand_name = temp.substring(temp.indexOf(">")+1, temp.lastIndexOf("<"));
-                            m.url = "https://www.health.gov.nl.ca/"+ temp.substring(temp.indexOf("\""),temp.lastIndexOf("\""));
+                            m.url = "https://www.health.gov.nl.ca"+ temp.substring(temp.indexOf("\"")+1,temp.lastIndexOf("\""));
                         }
                         if(counter==2) {
                             m.auth = br.readLine().trim();
@@ -106,7 +106,7 @@ public class NLPDP {
                             m = new Medication();
                             String temp = br.readLine().trim();
                             m.brand_name = temp.substring(temp.indexOf(">")+1, temp.lastIndexOf("<"));
-                            m.url = "https://www.health.gov.nl.ca/"+ temp.substring(temp.indexOf("\""),temp.lastIndexOf("\""));
+                            m.url = "https://www.health.gov.nl.ca"+ temp.substring(temp.indexOf("\"")+1,temp.lastIndexOf("\""));
                         }
                         if(counter==2) {
                             m.auth = br.readLine().trim();
@@ -167,7 +167,7 @@ public class NLPDP {
                             m = new Medication();
                             String temp = br.readLine().trim();
                             m.brand_name = temp.substring(temp.indexOf(">")+1, temp.lastIndexOf("<"));
-                            m.url = "https://www.health.gov.nl.ca/"+ temp.substring(temp.indexOf("\""),temp.lastIndexOf("\""));
+                            m.url = "https://www.health.gov.nl.ca"+ temp.substring(temp.indexOf("\"")+1,temp.lastIndexOf("\""));
                         }
                         if(counter==2) {
                             m.auth = br.readLine().trim();
@@ -215,27 +215,41 @@ public class NLPDP {
         }
     }
 
-    public static Medication loadInfo(Medication med) {
+    public static Medication loadInfo(String urlstring) {
+        Medication med = new Medication();
+        med.url = urlstring;
         try {
-            URL url = new URL(med.url);
+            URL url = new URL(urlstring);
             HttpURLConnection conn= (HttpURLConnection) url.openConnection();
             BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
             while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
             }
+            med.brand_name= br.readLine().trim();
             while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
             }
+            med.generic_name = br.readLine().trim();
             while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
             }
+            med.strength = br.readLine().trim();
             while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
             }
             med.DIN = br.readLine().trim();
             while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
             }
+            med.form = br.readLine().trim();
             while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
             }
             med.manufacturer = br.readLine().trim().replace("</td>", "");
             while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
+            }
+            while((output=br.readLine())!=null && output.trim().length()==0) {
+            }
+            if(output.contains("href")){
+                med.auth_url = "https://www.health.gov.nl.ca"+ output.substring(output.indexOf("'")+1,output.lastIndexOf("'"));
+                med.auth = output.substring(output.indexOf(">")+1,output.lastIndexOf("<")).trim();
+            } else {
+                med.auth = output.trim();
             }
             while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
             }
@@ -256,7 +270,7 @@ public class NLPDP {
             temp = new String[2];
             while((output=br.readLine())!=null && !output.contains("</td>")) {
                 if(output.contains("href")) {
-                    temp[1] = "https://www.health.gov.nl.ca/"+ output.substring(output.indexOf("\""),output.lastIndexOf("\""));
+                    temp[1] = "https://www.health.gov.nl.ca"+ output.substring(output.indexOf("\"")+1,output.lastIndexOf("\""))+"0";
                 } else if (output.contains("</a></br>")) {
                     temp[0] = output.trim().replace("</a></br>", "");
                     med.interchangeable_product.add(temp);

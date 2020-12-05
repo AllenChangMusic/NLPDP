@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,15 @@ public class NameFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_name, container, false);
         EditText editText = root.findViewById(R.id.editTextName);
         Button button = root.findViewById(R.id.button_name);
+
+        editText.setOnKeyListener((v, keyCode, event) -> {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                button.performClick();
+                return true;
+            }
+            return false;
+        });
 
         button.setOnClickListener(v -> {
             if(editText.getText().toString().trim().length()>0){
@@ -135,8 +145,7 @@ public class NameFragment extends Fragment {
         itemList.add(item4);
 
         RecyclerItem item5 = new RecyclerItem(1);
-        item5.setSecondText("MORE INFO:");
-        item5.setText("<CLICK HERE>");
+        item5.setText("<CLICK FOR MORE INFO>");
         item5.setMedication(med);
         itemList.add(item5);
 

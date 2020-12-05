@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,15 @@ public class DinFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_din, container, false);
         EditText editText = root.findViewById(R.id.editTextDIN);
         Button button = root.findViewById(R.id.button_din);
+
+        editText.setOnKeyListener((v, keyCode, event) -> {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                button.performClick();
+                return true;
+            }
+            return false;
+        });
 
         button.setOnClickListener(v -> {
             if(editText.getText().toString().trim().length()==8){
@@ -189,6 +199,11 @@ public class DinFragment extends Fragment {
         item4.setSecondText("ROUTE:");
         item4.setText(med.form);
         itemList.add(item4);
+
+        RecyclerItem item5 = new RecyclerItem(1);
+        item5.setText("<CLICK FOR MORE INFO>");
+        item5.setMedication(med);
+        itemList.add(item5);
 
         return itemList;
     }

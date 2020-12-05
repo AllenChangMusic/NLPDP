@@ -22,4 +22,13 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:drawable">@drawable/nlpdp_white</item>
     </style>
+
+    <style name="Theme.NLPDP.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.NLPDP.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.NLPDP.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

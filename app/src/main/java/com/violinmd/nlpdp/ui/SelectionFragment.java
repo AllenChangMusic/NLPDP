@@ -137,8 +137,8 @@ public class SelectionFragment extends Fragment {
         itemList.add(item4);
 
         RecyclerItem item5 = new RecyclerItem(1);
-        item4.setSecondText("MORE INFO:");
-        item4.setText("<CLICK HERE>");
+        item5.setText("<CLICK FOR MORE INFO>");
+        item5.setMedication(med);
         itemList.add(item5);
 
         return itemList;

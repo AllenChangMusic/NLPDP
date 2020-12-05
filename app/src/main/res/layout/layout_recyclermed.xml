@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/subtitle"
-            android:layout_width="110dp"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical|end"
             android:textAlignment="textEnd"
