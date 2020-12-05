@@ -14,18 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.multilevelview.MultiLevelRecyclerView;
 import com.multilevelview.models.RecyclerViewItem;
+import com.violinmd.nlpdp.Medication;
 import com.violinmd.nlpdp.NLPDP;
 import com.violinmd.nlpdp.R;
 import com.violinmd.nlpdp.RecyclerItem.RecyclerItem;
 import com.violinmd.nlpdp.RecyclerItem.RecyclerViewAdapter;
-
-import org.violinMD.Medication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +103,7 @@ public class NameFragment extends Fragment {
 
         for (int i = 0; i < meds.size(); i++) {
             RecyclerItem item = new RecyclerItem(0);
-            item.setSecondText("["+meds.get(i).schedule_name+"]");
+            item.setSecondText("["+meds.get(i).auth+"]");
             item.setText(meds.get(i).brand_name);
             item.addChildren((List<RecyclerViewItem>) recursivePopulate2(meds.get(i)));
             itemList.add(item);
@@ -117,24 +115,30 @@ public class NameFragment extends Fragment {
         List<RecyclerViewItem> itemList = new ArrayList<>();
 
         RecyclerItem item = new RecyclerItem(1);
-        item.setSecondText("   AUTH:");
-        item.setText(med.schedule_name);
+        item.setSecondText("AUTH:");
+        item.setText(med.auth);
         itemList.add(item);
 
         RecyclerItem item2 = new RecyclerItem(1);
         item2.setSecondText("PHARM:");
-        item2.setText(med.pharmaceutical_form_name);
+        item2.setText(med.generic_name);
         itemList.add(item2);
 
         RecyclerItem item3 = new RecyclerItem(1);
-        item3.setSecondText("   DOSE:");
-        item3.setText(med.din);
+        item3.setSecondText("DOSE:");
+        item3.setText(med.strength);
         itemList.add(item3);
 
         RecyclerItem item4 = new RecyclerItem(1);
         item4.setSecondText("ROUTE:");
-        item4.setText(med.route_of_administration_name);
+        item4.setText(med.form);
         itemList.add(item4);
+
+        RecyclerItem item5 = new RecyclerItem(1);
+        item5.setSecondText("MORE INFO:");
+        item5.setText("<CLICK HERE>");
+        item5.setMedication(med);
+        itemList.add(item5);
 
         return itemList;
     }

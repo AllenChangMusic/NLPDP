@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.multilevelview.MultiLevelAdapter;
 import com.multilevelview.MultiLevelRecyclerView;
-import com.violinmd.nlpdp.MainActivity;
+import com.violinmd.nlpdp.Medication;
 import com.violinmd.nlpdp.R;
 
 import java.util.ArrayList;
@@ -25,10 +24,11 @@ import java.util.List;
 public class RecyclerViewAdapter extends MultiLevelAdapter {
 
     private Holder mViewHolder;
-    private Context mContext;
+    private final Context mContext;
     private List<RecyclerItem> mListItems = new ArrayList<>();
     private RecyclerItem mItem;
-    private MultiLevelRecyclerView mMultiLevelRecyclerView;
+    private final MultiLevelRecyclerView mMultiLevelRecyclerView;
+    private Medication medication;
 
     public RecyclerViewAdapter(Context mContext, List<RecyclerItem> mListItems, MultiLevelRecyclerView mMultiLevelRecyclerView) {
         super(mListItems);
@@ -91,15 +91,19 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
 
         Holder(View itemView) {
             super(itemView);
-            mTitle = (TextView) itemView.findViewById(R.id.title);
-            mSubtitle = (TextView) itemView.findViewById(R.id.subtitle);
-            mTextBox = (LinearLayout) itemView.findViewById(R.id.text_box);
+            mTitle = itemView.findViewById(R.id.title);
+            mSubtitle = itemView.findViewById(R.id.subtitle);
+            mTextBox = itemView.findViewById(R.id.text_box);
 
             // The following code snippets are only necessary if you set multiLevelRecyclerView.removeItemClickListeners(); in MainActivity.java
             // this enables more than one click event on an item (e.g. Click Event on the item itself and click event on the expand button)
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (mSubtitle.getText().toString().contains("MORE INFO:")){
+                       System.out.println("BINGO");
+                       //mItem.getMedication()
+                    }
                     //set click event on item here
                     //Toast.makeText(mContext, String.format(Locale.ENGLISH, "Item at position %d was clicked!", getAdapterPosition()), Toast.LENGTH_SHORT).show();
                 }

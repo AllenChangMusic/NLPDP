@@ -1,48 +1,20 @@
-package com.violinmd.nlpdp;
+package com.violinmd.nlpdp.ui;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.multilevelview.MultiLevelRecyclerView;
+import com.violinmd.nlpdp.MainActivity;
+import com.violinmd.nlpdp.NLPDP;
 import com.violinmd.nlpdp.R;
-import com.violinmd.nlpdp.RecyclerItem.RecyclerItem;
-import com.violinmd.nlpdp.RecyclerItem.RecyclerViewAdapter;
-
-import org.violinMD.Medication;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 1000;
+    private static final int SPLASH_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
