@@ -51,7 +51,7 @@ public class DinFragment extends Fragment {
         button.setOnClickListener(v -> {
             if(editText.getText().toString().trim().length()==8){
                 try{
-                    int x = Integer.parseInt(editText.getText().toString().trim());
+                    Integer.parseInt(editText.getText().toString().trim());
                     Thread network = new Thread() {
                         public void run() {
                             ArrayList<Medication>meds = NLPDP.NLPDPsearchDIN(editText.getText().toString().trim());
