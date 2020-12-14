@@ -31,13 +31,11 @@ public class SplashActivity extends AppCompatActivity {
         Thread network = new Thread() {
             public void run() {
                 if(NLPDP.loadOptions()){
-                    runOnUiThread(() -> {
-                        new Handler().postDelayed(() -> {
-                            Intent homeIntent = new Intent(SplashActivity.this, MainActivity.class);
-                            startActivity(homeIntent);
-                            finish();
-                        },SPLASH_TIME_OUT);
-                    });
+                    runOnUiThread(() -> new Handler().postDelayed(() -> {
+                        Intent homeIntent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(homeIntent);
+                        finish();
+                    },SPLASH_TIME_OUT));
                 }
             }
         };

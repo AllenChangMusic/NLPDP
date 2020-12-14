@@ -18,32 +18,29 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.multilevelview.MultiLevelAdapter;
-import com.multilevelview.MultiLevelRecyclerView;
+import com.multilevelview.models.RecyclerViewItem;
 import com.violinmd.nlpdp.Medication;
 import com.violinmd.nlpdp.MedicationView;
 import com.violinmd.nlpdp.NLPDP;
 import com.violinmd.nlpdp.R;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 
 public class RecyclerViewAdapterMed extends MultiLevelAdapter {
 
-    private Holder mViewHolder;
     private final Context mContext;
-    private List<RecyclerItem> mListItems = new ArrayList<>();
-    private RecyclerItem mItem;
-    private final MultiLevelRecyclerView mMultiLevelRecyclerView;
-    private String url;
+    private final List<RecyclerViewItem> mListItems;
 
-    public RecyclerViewAdapterMed(Context mContext, List<RecyclerItem> mListItems, MultiLevelRecyclerView mMultiLevelRecyclerView) {
+    public RecyclerViewAdapterMed(Context mContext, List<RecyclerViewItem> mListItems) {
         super(mListItems);
         this.mListItems = mListItems;
         this.mContext = mContext;
-        this.mMultiLevelRecyclerView = mMultiLevelRecyclerView;
     }
 
+    @NotNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -52,13 +49,9 @@ public class RecyclerViewAdapterMed extends MultiLevelAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        mViewHolder = (Holder) holder;
-        mItem = mListItems.get(position);
+        Holder mViewHolder = (Holder) holder;
+        RecyclerItem mItem = (RecyclerItem) mListItems.get(position);
 
-        switch (getItemViewType(position)) {
-            default:
-                break;
-        }
         mViewHolder.urlText = mItem.getUrl();
         mViewHolder.mTitle.setText(mItem.getText());
         switch (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
@@ -91,7 +84,7 @@ public class RecyclerViewAdapterMed extends MultiLevelAdapter {
         }
     }
 
-    private class Holder extends RecyclerView.ViewHolder {
+    private static class Holder extends RecyclerView.ViewHolder {
 
         TextView mTitle, mSubtitle;
         String urlText;
@@ -111,7 +104,7 @@ public class RecyclerViewAdapterMed extends MultiLevelAdapter {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW);
                         browserIntent.setDataAndType(Uri.parse(urlText), "application/pdf");
                         final PackageManager packageManager = v.getContext().getPackageManager();
-                        List list = packageManager.queryIntentActivities(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                        List<?> list = packageManager.queryIntentActivities(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
                         if(list.size()>0){
                             Intent chooser = Intent.createChooser(browserIntent, "Open PDF file using:");
                             chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // optional

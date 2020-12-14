@@ -14,31 +14,29 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.multilevelview.MultiLevelAdapter;
-import com.multilevelview.MultiLevelRecyclerView;
+import com.multilevelview.models.RecyclerViewItem;
 import com.violinmd.nlpdp.Medication;
 import com.violinmd.nlpdp.MedicationView;
 import com.violinmd.nlpdp.NLPDP;
 import com.violinmd.nlpdp.R;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 
 public class RecyclerViewAdapter extends MultiLevelAdapter {
 
-    private Holder mViewHolder;
     private final Context mContext;
-    private List<RecyclerItem> mListItems = new ArrayList<>();
-    private RecyclerItem mItem;
-    private final MultiLevelRecyclerView mMultiLevelRecyclerView;
+    private final List<RecyclerViewItem> mListItems;
 
-    public RecyclerViewAdapter(Context mContext, List<RecyclerItem> mListItems, MultiLevelRecyclerView mMultiLevelRecyclerView) {
+    public RecyclerViewAdapter(Context mContext, List<RecyclerViewItem> mListItems) {
         super(mListItems);
         this.mListItems = mListItems;
         this.mContext = mContext;
-        this.mMultiLevelRecyclerView = mMultiLevelRecyclerView;
     }
 
+    @NotNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -47,14 +45,9 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        mViewHolder = (Holder) holder;
-        mItem = mListItems.get(position);
+        Holder mViewHolder = (Holder) holder;
+        RecyclerItem mItem = (RecyclerItem) mListItems.get(position);
 
-        switch (getItemViewType(position)) {
-            default:
-                //holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
-                break;
-        }
         mViewHolder.urlstring = mItem.getUrl();
         mViewHolder.mTitle.setText(mItem.getText());
         switch (mContext.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
@@ -87,7 +80,7 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
         }
     }
 
-    private class Holder extends RecyclerView.ViewHolder {
+    private static class Holder extends RecyclerView.ViewHolder {
 
         TextView mTitle, mSubtitle;
         String urlstring;
@@ -101,20 +94,17 @@ public class RecyclerViewAdapter extends MultiLevelAdapter {
 
             // The following code snippets are only necessary if you set multiLevelRecyclerView.removeItemClickListeners(); in MainActivity.java
             // this enables more than one click event on an item (e.g. Click Event on the item itself and click event on the expand button)
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mTitle.getText().toString().toLowerCase().contains("more info")){
-                        Thread network = new Thread() {
-                            public void run() {
-                                Medication newmed = NLPDP.loadInfo(urlstring);
-                                Intent intent = new Intent(v.getContext(), MedicationView.class);
-                                intent.putExtra("medication",newmed);
-                                v.getContext().startActivity(intent);
-                            }
-                        };
-                        network.start();
-                    }
+            itemView.setOnClickListener(v -> {
+                if (mTitle.getText().toString().toLowerCase().contains("more info")){
+                    Thread network = new Thread() {
+                        public void run() {
+                            Medication newmed = NLPDP.loadInfo(urlstring);
+                            Intent intent = new Intent(v.getContext(), MedicationView.class);
+                            intent.putExtra("medication",newmed);
+                            v.getContext().startActivity(intent);
+                        }
+                    };
+                    network.start();
                 }
             });
         }

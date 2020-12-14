@@ -64,8 +64,8 @@ public class NameFragment extends Fragment {
 
                                 MultiLevelRecyclerView multiLevelRecyclerView = new MultiLevelRecyclerView(getContext());
                                 multiLevelRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                                List<RecyclerItem> itemList = (List<RecyclerItem>) recursivePopulate1(meds);
-                                RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(), itemList, multiLevelRecyclerView);
+                                List<RecyclerViewItem> itemList = recursivePopulate1(meds);
+                                RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(), itemList);
                                 multiLevelRecyclerView.setAdapter(myAdapter);
                                 scrollView.addView(multiLevelRecyclerView);
                             });
@@ -75,13 +75,13 @@ public class NameFragment extends Fragment {
                                 scrollView.removeAllViews();
 
                                 TextView t1 = new TextView(getContext());
-                                t1.setText("NO DRUGS FOUND!");
+                                t1.setText(R.string.NoDrugsFound);
                                 t1.setTextColor(Color.RED);
                                 t1.setTextSize(20);
                                 t1.setPadding(10,0,10,10);
                                 t1.setTypeface(null, Typeface.BOLD);
                                 TextView t2 = new TextView(getContext());
-                                t2.setText("Check the spelling, or try an alternative generic or brand name.");
+                                t2.setText(R.string.CheckSpelling);
                                 switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
                                     case Configuration.UI_MODE_NIGHT_YES:
                                         t2.setTextColor(Color.WHITE);
@@ -108,20 +108,20 @@ public class NameFragment extends Fragment {
         return root;
     }
 
-    private List<?> recursivePopulate1(List<Medication> meds) {
+    private List<RecyclerViewItem> recursivePopulate1(List<Medication> meds) {
         List<RecyclerViewItem> itemList = new ArrayList<>();
 
         for (int i = 0; i < meds.size(); i++) {
             RecyclerItem item = new RecyclerItem(0);
             item.setSecondText("["+meds.get(i).auth+"]");
             item.setText(meds.get(i).brand_name);
-            item.addChildren((List<RecyclerViewItem>) recursivePopulate2(meds.get(i)));
+            item.addChildren(recursivePopulate2(meds.get(i)));
             itemList.add(item);
         }
         return itemList;
     }
 
-    private List<?> recursivePopulate2(Medication med) {
+    private List<RecyclerViewItem> recursivePopulate2(Medication med) {
         List<RecyclerViewItem> itemList = new ArrayList<>();
 
         RecyclerItem item = new RecyclerItem(1);

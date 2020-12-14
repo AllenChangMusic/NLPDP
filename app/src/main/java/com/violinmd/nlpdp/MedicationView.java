@@ -55,14 +55,14 @@ public class MedicationView extends AppCompatActivity {
         LinearLayout nestedScrollView = findViewById(R.id.med_scroll);
         MultiLevelRecyclerView multiLevelRecyclerView = new MultiLevelRecyclerView(getApplicationContext());
         multiLevelRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        List<RecyclerItem> itemList = (List<RecyclerItem>) recursivePopulate1(med);
-        RecyclerViewAdapterMed myAdapter = new RecyclerViewAdapterMed(getApplicationContext(), itemList, multiLevelRecyclerView);
+        List<RecyclerViewItem> itemList = recursivePopulate1(med);
+        RecyclerViewAdapterMed myAdapter = new RecyclerViewAdapterMed(getApplicationContext(), itemList);
         multiLevelRecyclerView.setAdapter(myAdapter);
         nestedScrollView.addView(multiLevelRecyclerView);
 
     }
 
-    private List<?> recursivePopulate1(Medication med) {
+    private List<RecyclerViewItem> recursivePopulate1(Medication med) {
         List<RecyclerViewItem> itemList = new ArrayList<>();
 
         RecyclerItem item = new RecyclerItem(0);

@@ -22,6 +22,8 @@ import com.violinmd.nlpdp.R;
 import com.violinmd.nlpdp.RecyclerItem.RecyclerItem;
 import com.violinmd.nlpdp.RecyclerItem.RecyclerViewAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class SelectionFragment extends Fragment {
             public void run() {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, arraySpinner) {
                     @Override
-                    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    public View getDropDownView(int position, View convertView, @NotNull ViewGroup parent) {
                         return super.getDropDownView(position, convertView, parent);
                     }
 
@@ -56,9 +58,6 @@ public class SelectionFragment extends Fragment {
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                        //Log.i("Spinner", spinner.getItemAtPosition(position).toString());
-                        if (position != arraySpinner.length - 1) {
-                        }
                     }
 
                     @Override
@@ -84,8 +83,8 @@ public class SelectionFragment extends Fragment {
 
                                 MultiLevelRecyclerView multiLevelRecyclerView = new MultiLevelRecyclerView(getContext());
                                 multiLevelRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                                List<RecyclerItem> itemList = (List<RecyclerItem>) recursivePopulate1(meds);
-                                RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(), itemList, multiLevelRecyclerView);
+                                List<RecyclerViewItem> itemList = recursivePopulate1(meds);
+                                RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(), itemList);
                                 multiLevelRecyclerView.setAdapter(myAdapter);
                                 scrollView.addView(multiLevelRecyclerView);
                             });
@@ -100,20 +99,19 @@ public class SelectionFragment extends Fragment {
         return root;
     }
 
-    private List<?> recursivePopulate1(List<Medication> meds) {
+    private List<RecyclerViewItem> recursivePopulate1(List<Medication> meds) {
         List<RecyclerViewItem> itemList = new ArrayList<>();
-
         for (int i = 0; i < meds.size(); i++) {
             RecyclerItem item = new RecyclerItem(0);
             item.setSecondText("["+meds.get(i).auth+"]");
             item.setText(meds.get(i).brand_name);
-            item.addChildren((List<RecyclerViewItem>) recursivePopulate2(meds.get(i)));
+            item.addChildren(recursivePopulate2(meds.get(i)));
             itemList.add(item);
         }
         return itemList;
     }
 
-    private List<?> recursivePopulate2(Medication med) {
+    private List<RecyclerViewItem> recursivePopulate2(Medication med) {
         List<RecyclerViewItem> itemList = new ArrayList<>();
 
         RecyclerItem item = new RecyclerItem(1);

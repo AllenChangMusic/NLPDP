@@ -223,39 +223,29 @@ public class NLPDP {
             HttpURLConnection conn= (HttpURLConnection) url.openConnection();
             BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String output;
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             med.brand_name= br.readLine().trim();
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             med.generic_name = br.readLine().trim();
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             med.strength = br.readLine().trim();
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             med.DIN = br.readLine().trim();
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             med.form = br.readLine().trim();
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             med.manufacturer = br.readLine().trim().replace("</td>", "");
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
-            while((output=br.readLine())!=null && output.trim().length()==0) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
+            while((output=br.readLine())!=null && output.trim().length()==0);
             if(output.contains("href")){
                 med.auth_url = "https://www.health.gov.nl.ca"+ output.substring(output.indexOf("'")+1,output.lastIndexOf("'"));
                 med.auth = output.substring(output.indexOf(">")+1,output.lastIndexOf("<")).trim();
             } else {
                 med.auth = output.trim();
             }
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             med.limitation = br.readLine().trim();
-            while((output=br.readLine())!=null && !output.contains("Package Size")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("Package Size"));
             String[] temp = new String[2];
             while((output=br.readLine())!=null && !output.contains("</table>")) {
                 if(output.contains("<tr>")) {
@@ -265,8 +255,7 @@ public class NLPDP {
                     temp = new String[2];
                 }
             }
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             temp = new String[2];
             while((output=br.readLine())!=null && !output.contains("</td>")) {
                 if(output.contains("href")) {
@@ -277,11 +266,9 @@ public class NLPDP {
                     temp = new String[2];
                 }
             }
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"\">"));
             med.interchangeable_price = br.readLine().trim();
-            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">")) {
-            }
+            while((output=br.readLine())!=null && !output.contains("<td align=\"left\" width=\"54%\">"));
             med.atc = br.readLine().trim();
             br.close();
         } catch (Exception e) {
