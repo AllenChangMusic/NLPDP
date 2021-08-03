@@ -6,20 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".ui.NameFragment">
 
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Enter generic or brand name"
-        android:inputType="none|text"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Generic or Brand Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ems="10"
+            android:inputType="none|text"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/button_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +37,7 @@
         android:layout_marginEnd="16dp"
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+        app:layout_constraintTop_toBottomOf="@+id/textField" />
 
     <LinearLayout
         android:id="@+id/scroll_name"

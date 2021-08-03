@@ -6,18 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.DinFragment">
 
-    <EditText
-        android:id="@+id/editTextDIN"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Enter DIN"
-        android:inputType="number"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="DIN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextDIN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ems="10"
+            android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
 <Button
 android:id="@+id/button_din"
@@ -26,8 +35,9 @@ android:layout_height="wrap_content"
 android:layout_marginTop="16dp"
 android:layout_marginEnd="16dp"
 android:text="Search"
+    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
 app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintTop_toBottomOf="@+id/editTextDIN" />
+app:layout_constraintTop_toBottomOf="@+id/textField" />
 
 <LinearLayout
 android:id="@+id/scroll_din"
