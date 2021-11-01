@@ -102,4 +102,8 @@
     <string name="NoDrugsFound">NO DRUGS FOUND!</string>
     <string name="VerifyDIN">Verify the DIN entered and try again.</string>
     <string name="CheckSpelling">Check the spelling, or try an alternative generic or brand name.</string>
+    <string name="generic_or_brand_name">Generic or Brand Name</string>
+    <string name="din">DIN</string>
+    <string name="search">Search</string>
+    <string name="select_a_medication">Select a Medication</string>
 </resources>

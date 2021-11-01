@@ -8,7 +8,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textholder"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        app:boxCornerRadiusBottomEnd="36dp"
+        app:boxCornerRadiusTopEnd="36dp"
+        app:boxCornerRadiusBottomStart="36dp"
+        app:boxCornerRadiusTopStart="36dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -23,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Select a Medication"
+            android:hint="@string/select_a_medication"
             android:inputType="none"
             android:spinnerMode="dialog" />
     </com.google.android.material.textfield.TextInputLayout>
