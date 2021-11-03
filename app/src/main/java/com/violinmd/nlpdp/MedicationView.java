@@ -2,6 +2,7 @@ package com.violinmd.nlpdp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -9,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.multilevelview.MultiLevelRecyclerView;
 import com.multilevelview.models.RecyclerViewItem;
 import com.violinmd.nlpdp.RecyclerItem.RecyclerItem;
@@ -17,6 +17,7 @@ import com.violinmd.nlpdp.RecyclerItem.RecyclerViewAdapterMed;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MedicationView extends AppCompatActivity {
 
@@ -26,11 +27,10 @@ public class MedicationView extends AppCompatActivity {
         setContentView(R.layout.activity_medication_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
+        Objects.requireNonNull(getSupportActionBar()).show();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
-
         Intent i = getIntent();
         Medication med = (Medication) i.getSerializableExtra("medication");
         String name = "";
@@ -43,13 +43,11 @@ public class MedicationView extends AppCompatActivity {
         if (name.length()==0){
             name=med.brand_name;
         }
-        toolBarLayout.setTitle(name);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(name);
         if(med.auth.toLowerCase().contains("open")){
-            toolBarLayout.setBackgroundColor(Color.parseColor("#089000"));
-            toolbar.setBackgroundColor(Color.parseColor("#089000"));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#089000")));
         } else if (med.auth.toLowerCase().contains("special")){
-            toolBarLayout.setBackgroundColor(Color.parseColor("#990000"));
-            toolbar.setBackgroundColor(Color.parseColor("#990000"));
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#990000")));
         }
 
         LinearLayout nestedScrollView = findViewById(R.id.med_scroll);
