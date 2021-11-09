@@ -3,7 +3,9 @@ package com.violinmd.nlpdp;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,8 @@ public class MedicationView extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).show();
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+        Drawable backArrow = getResources().getDrawable(R.drawable.ic_back_arrow);
+        getSupportActionBar().setHomeAsUpIndicator(backArrow);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
         Intent i = getIntent();
         Medication med = (Medication) i.getSerializableExtra("medication");
@@ -43,7 +47,8 @@ public class MedicationView extends AppCompatActivity {
         if (name.length()==0){
             name=med.brand_name;
         }
-        Objects.requireNonNull(getSupportActionBar()).setTitle(name);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(Html.fromHtml("<font color='#ffffff'>"+name+"</font>")); //force white text despite theme
+
         if(med.auth.toLowerCase().contains("open")){
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#089000")));
         } else if (med.auth.toLowerCase().contains("special")){
