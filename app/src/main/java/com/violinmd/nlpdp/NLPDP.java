@@ -1,5 +1,7 @@
 package com.violinmd.nlpdp;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -249,8 +251,8 @@ public class NLPDP {
             String[] temp = new String[2];
             while((output=br.readLine())!=null && !output.contains("</table>")) {
                 if(output.contains("<tr>")) {
-                    temp[0] = br.readLine().trim().replace("<td valign=\"top\" width=\"80\" align=\"center\">", "").replace("</td>", "");
-                    temp[1] = br.readLine().trim().replace("<td valign=\"top\" width=\"80\" align=\"center\">", "").replace("</td>", "").trim();
+                    temp[0] = br.readLine().trim().replaceAll("<td valign=\".*?\" width=\".*?\" align=\".*?\">", "").replace("</td>", "").trim();
+                    temp[1] = br.readLine().trim().replaceAll("<td valign=\".*?\" width=\".*?\" align=\".*?\">", "").replace("</td>", "").trim();
                     med.pricing.add(temp);
                     temp = new String[2];
                 }

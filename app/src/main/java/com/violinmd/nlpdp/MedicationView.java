@@ -146,7 +146,7 @@ public class MedicationView extends AppCompatActivity {
 
         RecyclerItem item11 = new RecyclerItem(0);
         item11.setSecondText("INTERCHANGEABLE UNIT PRICE:");
-        item11.setText(med.interchangeable_price);
+        item11.setText("$"+med.interchangeable_price);
         itemList.add(item11);
 
         RecyclerItem item12 = new RecyclerItem(0);
