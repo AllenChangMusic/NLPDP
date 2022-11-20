@@ -20,16 +20,14 @@
             android:label="@string/title_activity_medication_view"
             android:theme="@style/Theme.NLPDP.NoActionBar" />
         <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".MainActivity"
+            android:theme="@style/Theme.App.Starting"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity" />
+    </activity>
     </application>
 
     <queries>
